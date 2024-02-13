@@ -1,41 +1,47 @@
-import {Box, Typography, Button as MUIButton} from "@mui/material";
+import { Box, Typography, Button as MUIButton } from "@mui/material";
 import Button from "./Button";
 import Image from "next/image";
 import Link from "next/link";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { removeAll } from "../store/cartSlice";
 
 const Cart = () => {
-    return(
-            <Box
-              sx={{
-                position: "absolute",
-                height: "100vh",
-                width: "99.2vw",
-                backgroundColor: "rgba(0,0,0,0.5)",
-                top: 120,
-              }}
-            >
-              <Box
-                sx={{
-                  position: "absolute",
-                  right: 400,
-                  top: 20,
-                  minHeight: "20vh",
-                  width: "20vw",
-                  backgroundColor: "white",
-                  color: "black",
-                  padding: "1.5rem",
-                  textTransform: "uppercase",
-                  display: "flex",
-                  flexDirection: "column",
-                }}
-              >
-                <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-                  <Typography>Cart</Typography>
-                  <MUIButton >
-                    Remove All
-                  </MUIButton>
-                </Box>
-                {/* {cart.map((product) => {
+  const cartArr = useSelector((state: any) => state.cart);
+  const dispatch = useDispatch();
+  console.log(cartArr, 'cart');
+
+  return (
+    <Box
+      sx={{
+        position: "absolute",
+        height: "88.8vh",
+        width: "99.2vw",
+        backgroundColor: "rgba(0,0,0,0.5)",
+        top: 73,
+        right: -2,
+      }}
+    >
+      <Box
+        sx={{
+          position: "absolute",
+          right: 200,
+          top: 20,
+          minHeight: "20vh",
+          width: "20vw",
+          backgroundColor: "white",
+          color: "black",
+          padding: "1.5rem",
+          textTransform: "uppercase",
+          display: "flex",
+          flexDirection: "column",
+        }}
+      >
+        <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+          <Typography>Cart</Typography>
+          <MUIButton onClick={()=>dispatch(removeAll())}>Remove All</MUIButton>
+        </Box>
+        {cartArr.length > 0 && cartArr.map((product: any) => {
                   return (
                     <Box
                       key={product.id}
@@ -79,21 +85,21 @@ const Cart = () => {
                       </Box>
                     </Box>
                   );
-                })} */}
-                <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-                  <Typography>Total</Typography>
-                  <Typography>$$$</Typography>
-                </Box>
-                <Button
-                  color="#d97d45"
-                  variant="contained"
-                  sx={{ width: "100%", marginTop: "1rem" }}
-                >
-                  <Link href="/checkout">Checkout</Link>
-                </Button>
-              </Box>
-            </Box>
-    )
-}
+                })}
+        <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+          <Typography>Total</Typography>
+          <Typography>$$$</Typography>
+        </Box>
+        <Button
+          color="#d97d45"
+          variant="contained"
+          sx={{ width: "100%", marginTop: "1rem" }}
+        >
+          <Link href="/checkout">Checkout</Link>
+        </Button>
+      </Box>
+    </Box>
+  );
+};
 
 export default Cart;

@@ -1,18 +1,31 @@
-import { Button as MuiButton } from "@mui/material"
+import { Button as MuiButton } from "@mui/material";
 
 interface ButtonProps {
-    variant: 'contained' | 'outlined' | 'text'
-    color: String,
-    children: any,
-    sx?: any
+  variant: "contained" | "outlined" | "text";
+  color: String;
+  children: any;
+  sx?: any;
+  onClick?: any;
 }
 
-const Button = ({ variant, color, children, sx }: ButtonProps) => {
-    return (
-        <>
-            <MuiButton variant={variant} sx={{ backgroundColor: `${color}`, borderRadius: 0, padding: '1rem' }}>{children}</MuiButton>
-        </>
-    )
-}
+const Button: React.FC<ButtonProps> = ({
+  variant,
+  color,
+  children,
+  sx,
+  onClick,
+}) => {
+  return (
+    <>
+      <MuiButton
+        variant={variant}
+        onClick={onClick}
+        sx={{ backgroundColor: `${color}`, borderRadius: 0, padding: "1rem" }}
+      >
+        {children}
+      </MuiButton>
+    </>
+  );
+};
 
-export default Button
+export default Button;
