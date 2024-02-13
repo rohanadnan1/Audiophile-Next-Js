@@ -21,7 +21,7 @@ const Home: NextPage = () => {
           marginTop: '1.3rem',
         }} />
       </Container>
-     <Container>
+     <Container sx={{marginTop: '3rem'}}>
         <Hero />
      </Container>
     </div>
