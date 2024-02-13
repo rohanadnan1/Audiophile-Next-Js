@@ -34,7 +34,7 @@ const YX1Earphones = () => {
           <Typography variant="h4" sx={{ marginBottom: "1rem" }}>
             YX1 EARPHONES
           </Typography>
-          <Button variant="outlined" color="null">
+          <Button variant="outlined" color="null" sx={{width: '20px'}}>
             <Link href="/1">SEE PRODUCT</Link>
           </Button>
         </Box>

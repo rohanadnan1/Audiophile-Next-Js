@@ -1,5 +1,6 @@
 import { Box, Container, Typography } from "@mui/material"
 import Button from "./Button"
+import Link from "next/link"
 
 const Hero = () => {
     return (
@@ -7,7 +8,9 @@ const Hero = () => {
             <Typography variant="h3" sx={{color: 'rgb(109, 109, 109)', letterSpacing: 2, fontSize: '2rem', fontWeight: 600, marginBottom: '1.4rem'}}>New Products</Typography>
             <Typography variant="h1" sx={{fontWeight: 800, fontSize: '3rem', marginBottom: '1.5rem'}}>XX99 Mark II Headphones</Typography>
             <Typography variant="body1" sx={{color: 'rgb(109, 109, 109)', marginBottom: '1.5rem', fontSize: '1rem'}}>Experience natural, lifelike audio and exceptional build quality made for the passionate music enthusiast.</Typography>
-            <Button variant="contained" color= 'rgb(218, 124, 74)' children="See Product"/>
+            <Button variant="contained" color= 'rgb(218, 124, 74)'>
+                <Link href="/4">SEE PRODUCT</Link>
+            </Button>
         </Box>
     )
 }

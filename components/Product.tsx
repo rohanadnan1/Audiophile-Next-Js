@@ -81,7 +81,7 @@ const Product: React.FC<Props> = ({ product }) => {
         >
           {product.description}
         </Typography>
-        <Typography variant="h5">{product.price}</Typography>
+        <Typography variant="h5" sx={{fontSize: '1rem', fontWeight: '600'}}>Price: {product.price}$</Typography>
         <Box sx={{ display: "flex", alignItems: "center" }}>
           <ProductCounter />
           <Button variant="contained" color="#d97d45" onClick={()=>handleAdd(product)}>
