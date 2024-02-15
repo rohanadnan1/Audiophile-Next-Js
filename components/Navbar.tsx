@@ -4,7 +4,6 @@ import Link from "next/link";
 import { useState } from "react";
 import Cart from "./Cart";
 
-// TODO check if the page is home then remove this background color styling
 
 const Navbar = () => {
   const [showCart, setShowCart] = useState(false);
@@ -20,6 +19,7 @@ const Navbar = () => {
           color: "white",
           paddingBottom: "0.3rem",
         }}
+        onClick={() => showCart ? setShowCart(false) : null}
       >
         <Image
           src="/assets/shared/desktop/logo.svg"
