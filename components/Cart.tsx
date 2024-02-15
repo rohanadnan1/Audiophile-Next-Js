@@ -10,8 +10,11 @@ import { useRouter } from "next/router";
 const Cart = () => {
   const cartArr = useSelector((state: any) => state.cart.cart);
   const dispatch = useDispatch();
-  console.log(cartArr, "cart");
   const router = useRouter();
+  const bill = useSelector((state: any) => state.cart.bill);
+  console.log(bill, 'bill');
+  let total = bill.reduce((acc: any, curr: any) => acc + curr.price, 0);
+  console.log(total, 'total');
 
   if (router.pathname !== "/") {
     return (
@@ -177,7 +180,7 @@ const Cart = () => {
           })}
         <Box sx={{ display: "flex", justifyContent: "space-between" }}>
           <Typography>Total</Typography>
-          <Typography>$$$</Typography>
+          <Typography>{total}$</Typography>
         </Box>
         <Button
           color="#d97d45"

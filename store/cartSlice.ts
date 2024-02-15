@@ -63,8 +63,13 @@ const cartSlice = createSlice({
       state.bill = [];
       return state;
     },
+
+    addBill: (state, action) => {
+      // this reducer will add the bill to the state
+      state.bill.push(action.payload);
+    },
   },
 });
 
-export const { addToCart, removeFromCart, removeAll } = cartSlice.actions;
+export const { addToCart, removeFromCart, removeAll, addBill } = cartSlice.actions;
 export default cartSlice.reducer;
