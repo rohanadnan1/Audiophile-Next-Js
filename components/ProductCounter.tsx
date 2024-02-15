@@ -1,8 +1,12 @@
 import { Box, Button } from "@mui/material";
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { increment, decrement } from "../store/countSlice";
 
 const ProductCounter = () => {
-  const [count, setCount] = useState(0);
+  const count = useSelector((state: any) => state.count);
+  const dispatch = useDispatch();
   return (
     <Box
       sx={{
@@ -11,9 +15,11 @@ const ProductCounter = () => {
         marginRight: "0.5rem",
       }}
     >
-      <Button onClick={() => count > 0 ? setCount(count - 1): null }>-</Button>
+      <Button onClick={() => (count > 0 ? dispatch(decrement()) : null)}>
+        -
+      </Button>
       {count}
-      <Button onClick={() => setCount(count + 1)}>+</Button>
+      <Button onClick={() => dispatch(increment())}>+</Button>
     </Box>
   );
 };

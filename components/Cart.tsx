@@ -8,7 +8,7 @@ import { removeAll } from "../store/cartSlice";
 import { useRouter } from "next/router";
 
 const Cart = () => {
-  const cartArr = useSelector((state: any) => state.cart);
+  const cartArr = useSelector((state: any) => state.cart.cart);
   const dispatch = useDispatch();
   console.log(cartArr, "cart");
   const router = useRouter();

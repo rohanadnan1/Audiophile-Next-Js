@@ -24,7 +24,7 @@ const Product: React.FC<Props> = ({ product }) => {
     const cart = useSelector((state: any) => state.cart)
 
     const handleAdd = (product: any) => {
-        dispatch(addToCart(product))
+        dispatch(addToCart({...product, count: 1}))
     }
     
     console.log(cart)
