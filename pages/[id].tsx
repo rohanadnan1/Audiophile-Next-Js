@@ -11,7 +11,7 @@ interface Product{
 const Product = () => {
   const router = useRouter();
   const { id } = router.query;
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState<Product[]>([]);
   const [product, setProduct] = useState<Product[]>([]);
 
@@ -20,7 +20,7 @@ const Product = () => {
       .then((res) => res.json())
       .then((response: any) => {
         setData(response);
-        setIsLoaded(false);
+        setIsLoading(false);
         console.log(response);
         const matchedProducts = response.filter((item: any)=>item.category === id || item.id.toString() === id);
 
@@ -30,7 +30,7 @@ const Product = () => {
       });
   }, [id]);
 
-  if (isLoaded) return <h1>Loading...</h1>;
+  if (isLoading) return <h1>Loading...</h1>;
 
   return (
     <div>
