@@ -8,13 +8,18 @@ import { removeFromCart } from "../store/cartSlice";
 const ProductCounter = ({product}: any) => {
   const count = useSelector((state: any) => state.count);
   const dispatch = useDispatch();
+  const productWithCount = {
+    ...product,
+    count
+  }
 
   const decrementCount = () => {
     if (count > 0) {
       dispatch(decrement());
-      dispatch(removeFromCart(product.id));
+      dispatch(removeFromCart(productWithCount));
     }
   }
+  console.log(product, 'product');
 
   return (
     <Box
@@ -27,7 +32,7 @@ const ProductCounter = ({product}: any) => {
       <Button onClick={decrementCount}>
         -
       </Button>
-      {count}
+      {productWithCount.count}
       <Button onClick={() => dispatch(increment())}>+</Button>
     </Box>
   );

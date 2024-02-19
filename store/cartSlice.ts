@@ -50,9 +50,26 @@ const cartSlice = createSlice({
     },
     removeFromCart: (state, action) => {
       const index = state.cart.findIndex(
-        (product: any) => product.id === action.payload
+        (product: any) => product.id === action.payload.id
       );
-      state.cart = state.cart.splice(index, 1);
+      const billIndex = state.bill.findIndex(
+        (bill) =>{
+          return bill.price === action.payload.price
+        }
+      );
+      console.log(billIndex, 'billIndex');
+
+      if (index !== -1) {
+        if (state.cart[index].count === 1) {
+          state.cart.splice(index, 1);
+        } else {
+          state.cart[index].count -= 1;
+        }
+      }
+
+      if (billIndex !== -1) {
+        state.bill.splice(billIndex, 1);
+      }
     },
     removeAll: (state) => {
       // this reducer will remove all items present in the arr
