@@ -19,10 +19,11 @@ const Product = () => {
     fetch("/api/data")
       .then((res) => res.json())
       .then((response: any) => {
-        setData(response);
+        const updatedResponse = response.map((item: any) => ({...item, count: 0}));
+        setData(updatedResponse);
         setIsLoading(false);
-        console.log(response);
-        const matchedProducts = response.filter((item: any)=>item.category === id || item.id.toString() === id);
+        // console.log(updatedResponse, 'data');
+        const matchedProducts = updatedResponse.filter((item: any)=>item.category === id || item.id.toString() === id);
 
         // this matchedProducts will repeat the product because of the || operator in the filter method above to avoid that we will use the Set method to remove the duplicates
 

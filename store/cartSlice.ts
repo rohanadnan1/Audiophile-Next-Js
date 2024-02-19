@@ -52,12 +52,6 @@ const cartSlice = createSlice({
       const index = state.cart.findIndex(
         (product: any) => product.id === action.payload.id
       );
-      const billIndex = state.bill.findIndex(
-        (bill) =>{
-          return bill.price === action.payload.price
-        }
-      );
-      console.log(billIndex, 'billIndex');
 
       if (index !== -1) {
         if (state.cart[index].count === 1) {
@@ -65,10 +59,6 @@ const cartSlice = createSlice({
         } else {
           state.cart[index].count -= 1;
         }
-      }
-
-      if (billIndex !== -1) {
-        state.bill.splice(billIndex, 1);
       }
     },
     removeAll: (state) => {
@@ -83,9 +73,42 @@ const cartSlice = createSlice({
       // this reducer will add the bill to the state
       state.bill.push(action.payload);
     },
+
+    removeBill: (state, action) => {
+      const item = state.bill.lastIndexOf(action.payload);
+      if (item !== -1) {
+        state.bill.splice(item, 1);
+      }
+    },
+
+    incrementCount: (state, action) => {
+      const item = state.cart.find(
+        (product) => product.id === action.payload.id
+      );
+      console.log(item, "item");
+      // if (item) {
+      //   item.count += 1;
+      // }
+    },
+
+    decrementCount: (state, action) => {
+      const item = state.cart.find(
+        (product) => product.id === action.payload.id
+      );
+      if (item) {
+        item.count -= 1;
+      }
+    },
   },
 });
 
-export const { addToCart, removeFromCart, removeAll, addBill } =
-  cartSlice.actions;
+export const {
+  addToCart,
+  removeFromCart,
+  removeAll,
+  addBill,
+  removeBill,
+  incrementCount,
+  decrementCount,
+} = cartSlice.actions;
 export default cartSlice.reducer;

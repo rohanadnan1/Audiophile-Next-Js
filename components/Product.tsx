@@ -21,8 +21,8 @@ const Product: React.FC<Props> = ({ product }) => {
 
   const handleAdd = (product: any) => {
     if (count > 0) {
-      dispatch(addToCart({ ...product, count }));
-      dispatch(addBill({ price: product.price * count }));
+      dispatch(addToCart(product));
+      dispatch(addBill({ price: product.price * product.count }));
     } else {
       dispatch(addToCart({ ...product, count: 1 }));
       dispatch(addBill({ price: product.price }));
@@ -86,7 +86,7 @@ const Product: React.FC<Props> = ({ product }) => {
         </Typography>
         <Box sx={{ display: "flex", alignItems: "center" }}>
           <ProductCounter product={product} />
-          {count > 0 ? (
+          {product.count > 0 ? (
             <Button
               variant="contained"
               color="#d97d45"

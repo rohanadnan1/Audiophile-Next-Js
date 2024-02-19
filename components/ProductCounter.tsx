@@ -2,24 +2,28 @@ import { Box, Button } from "@mui/material";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { increment, decrement } from "../store/countSlice";
-import { removeFromCart } from "../store/cartSlice";
+// import { increment, decrement } from "../store/countSlice";
+import { removeFromCart, removeBill, decrementCount, incrementCount, addBill } from "../store/cartSlice";
 
 const ProductCounter = ({product}: any) => {
-  const count = useSelector((state: any) => state.count);
   const dispatch = useDispatch();
-  const productWithCount = {
-    ...product,
-    count
-  }
+  
 
-  const decrementCount = () => {
-    if (count > 0) {
-      dispatch(decrement());
-      dispatch(removeFromCart(productWithCount));
+  const decrementCountFunc = () => {
+    if (product.count > 0) {
+      dispatch(decrementCount(product))
+      dispatch(removeFromCart(product));
+      dispatch(removeBill(product))
     }
   }
-  console.log(product, 'product');
+
+  const incrementCountFunc = () => {
+    dispatch(incrementCount(product))
+    dispatch(addBill({price: product.price}))
+    console.log( 'product');
+  }
+
+  // console.log(product, 'product');
 
   return (
     <Box
@@ -29,11 +33,11 @@ const ProductCounter = ({product}: any) => {
         marginRight: "0.5rem",
       }}
     >
-      <Button onClick={decrementCount}>
+      <Button onClick={decrementCountFunc}>
         -
       </Button>
-      {productWithCount.count}
-      <Button onClick={() => dispatch(increment())}>+</Button>
+      {product.count}
+      <Button onClick={incrementCountFunc}>+</Button>
     </Box>
   );
 };
