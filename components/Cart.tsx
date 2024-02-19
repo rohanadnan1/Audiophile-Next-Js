@@ -97,7 +97,7 @@ const Cart = () => {
             })}
           <Box sx={{ display: "flex", justifyContent: "space-between" }}>
             <Typography>Total</Typography>
-            <Typography>$$$</Typography>
+            <Typography>{total}$</Typography>
           </Box>
           <Button
             color="#d97d45"

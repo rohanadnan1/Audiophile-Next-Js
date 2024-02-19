@@ -37,19 +37,19 @@ const Navbar = () => {
             Home
           </Link>
           <Link
-            href="/"
+            href="headphones"
             style={{ marginRight: "2rem", fontWeight: 700, color: "white" }}
           >
             Headphone
           </Link>
           <Link
-            href="/"
+            href="speakers"
             style={{ marginRight: "2rem", fontWeight: 700, color: "white" }}
           >
             Speakers
           </Link>
           <Link
-            href="/"
+            href="earphones"
             style={{ marginRight: "2rem", fontWeight: 700, color: "white" }}
           >
             Earphones

@@ -86,13 +86,15 @@ const Product: React.FC<Props> = ({ product }) => {
         </Typography>
         <Box sx={{ display: "flex", alignItems: "center" }}>
           <ProductCounter />
-          <Button
-            variant="contained"
-            color="#d97d45"
-            onClick={() => handleAdd(product)}
-          >
-            Add to Cart
-          </Button>
+          {count > 0 ? (
+            <Button
+              variant="contained"
+              color="#d97d45"
+              onClick={() => handleAdd(product)}
+            >
+              Add to Cart
+            </Button>
+          ) : null}
         </Box>
       </Box>
     </Container>
