@@ -3,10 +3,19 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { increment, decrement } from "../store/countSlice";
+import { removeFromCart } from "../store/cartSlice";
 
-const ProductCounter = () => {
+const ProductCounter = ({product}: any) => {
   const count = useSelector((state: any) => state.count);
   const dispatch = useDispatch();
+
+  const decrementCount = () => {
+    if (count > 0) {
+      dispatch(decrement());
+      dispatch(removeFromCart(product.id));
+    }
+  }
+
   return (
     <Box
       sx={{
@@ -15,7 +24,7 @@ const ProductCounter = () => {
         marginRight: "0.5rem",
       }}
     >
-      <Button onClick={() => (count > 0 ? dispatch(decrement()) : null)}>
+      <Button onClick={decrementCount}>
         -
       </Button>
       {count}

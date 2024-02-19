@@ -41,9 +41,7 @@ const cartSlice = createSlice({
       if (index === -1) {
         state.cart.push(action.payload);
       }
-      
-      // TODO : increase the quantity of the product
-      
+
       // if the product is already in the cart, we will just increase the quantity
       // this will increase the quantity of the product
       if (index !== -1) {
@@ -71,5 +69,6 @@ const cartSlice = createSlice({
   },
 });
 
-export const { addToCart, removeFromCart, removeAll, addBill } = cartSlice.actions;
+export const { addToCart, removeFromCart, removeAll, addBill } =
+  cartSlice.actions;
 export default cartSlice.reducer;

@@ -85,7 +85,7 @@ const Product: React.FC<Props> = ({ product }) => {
           Price: {product.price}$
         </Typography>
         <Box sx={{ display: "flex", alignItems: "center" }}>
-          <ProductCounter />
+          <ProductCounter product={product} />
           {count > 0 ? (
             <Button
               variant="contained"
