@@ -12,9 +12,7 @@ const Cart = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const bill = useSelector((state: any) => state.cart.bill);
-  console.log(bill, 'bill');
   let total = bill.reduce((acc: any, curr: any) => acc + curr.price, 0);
-  console.log(total, 'total');
 
   if (router.pathname !== "/") {
     return (
@@ -51,6 +49,7 @@ const Cart = () => {
           </Box>
           {cartArr.length > 0 &&
             cartArr.map((product: any) => {
+              console.log(product, "product");
               return (
                 <Box
                   key={product.id}

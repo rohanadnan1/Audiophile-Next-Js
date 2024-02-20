@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 interface CartState {
   id: number;
@@ -27,6 +27,16 @@ const initialState: Cart = {
   bill: [],
 };
 
+
+export const updateCount = createAsyncThunk(
+  'cart/updateCount',
+  async ({ productId, newCount }: { productId: string; newCount: number }) => {
+    // Here, you would typically make an API call to update the count on the server
+    // For simplicity, we'll just return the new count
+    return newCount;
+  }
+);
+
 const cartSlice = createSlice({
   name: "cart",
   initialState,
@@ -39,7 +49,7 @@ const cartSlice = createSlice({
       );
 
       if (index === -1) {
-        state.cart.push(action.payload);
+        state.cart.push({ ...action.payload, count: 1 });
       }
 
       // if the product is already in the cart, we will just increase the quantity
@@ -82,13 +92,21 @@ const cartSlice = createSlice({
     },
 
     incrementCount: (state, action) => {
-      const item = state.cart.find(
-        (product) => product.id === action.payload.id
-      );
-      console.log(item, "item");
-      // if (item) {
-      //   item.count += 1;
-      // }
+      // Find the item in the state
+      const item = state.cart.find(i => i.id === action.payload.id);
+    
+      // Check if item exists
+      if (item) {
+        // Return a new state with the updated count
+        return {
+          ...state,
+          items: state.cart.map(i => 
+            i.id === action.payload.id ? { ...i, count: i.count + 1 } : i
+          )
+        };
+      } else {
+        console.error('Item not found');
+      }
     },
 
     decrementCount: (state, action) => {
@@ -97,8 +115,18 @@ const cartSlice = createSlice({
       );
       if (item) {
         item.count -= 1;
+        action.payload.count = item.count;
       }
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(updateCount.fulfilled, (state, action) => {
+      const { productId, newCount } = action.meta.arg;
+      const product = state.cart.find((product) => product.id.toString() === productId);
+      if (product) {
+        product.count = newCount;
+      }
+    });
   },
 });
 

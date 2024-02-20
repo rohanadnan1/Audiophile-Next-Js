@@ -17,15 +17,16 @@ interface Props {
 
 const Product: React.FC<Props> = ({ product }) => {
   const dispatch = useDispatch();
-  const count = useSelector((state: any) => state.count);
+  const productInCart = useSelector((state: any) =>
+    state.cart.cart.find((item: any) => item.id === product.id)
+  );
+  console.log(productInCart, "productInCart");
 
   const handleAdd = (product: any) => {
-    if (count > 0) {
-      dispatch(addToCart(product));
-      dispatch(addBill({ price: product.price * product.count }));
+    if (productInCart) {
+      dispatch(addToCart({ ...product, count: productInCart.count }));
     } else {
       dispatch(addToCart({ ...product, count: 1 }));
-      dispatch(addBill({ price: product.price }));
     }
   };
 
@@ -86,15 +87,13 @@ const Product: React.FC<Props> = ({ product }) => {
         </Typography>
         <Box sx={{ display: "flex", alignItems: "center" }}>
           <ProductCounter product={product} />
-          {product.count > 0 ? (
-            <Button
-              variant="contained"
-              color="#d97d45"
-              onClick={() => handleAdd(product)}
-            >
-              Add to Cart
-            </Button>
-          ) : null}
+          <Button
+            variant="contained"
+            color="#d97d45"
+            onClick={() => handleAdd(product)}
+          >
+            Add to Cart
+          </Button>
         </Box>
       </Box>
     </Container>
